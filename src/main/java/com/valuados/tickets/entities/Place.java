@@ -1,8 +1,5 @@
 package com.valuados.tickets.entities;
 
-/**
- * Created by valua on 4/5/2017.
- */
 public class Place {
     private int row;
     private int seat;

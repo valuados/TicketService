@@ -3,10 +3,6 @@ package com.valuados.tickets.entities;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-/**
- * Created by valua on 4/5/2017.
- */
-
 public class Session {
     private int id;
     private String time;

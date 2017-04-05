@@ -1,4 +1,4 @@
-package com.valuados.tickets;
+package com.valuados.tickets.main;
 
 import com.valuados.tickets.entities.*;
 
@@ -7,10 +7,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-/**
- * Hello world!
- *
- */
 public class App 
 {
     private static final String INPUTFILENAME = "input.txt";
@@ -27,7 +23,7 @@ public class App
             doCommand(schedule, bookingList);
         }
     }
-    public static void readFile(String filename, Schedule schedule, BookingList bookingList){
+    private static void readFile(String filename, Schedule schedule, BookingList bookingList){
         try (Scanner sc = new Scanner(new File(INPUTFILENAME))) {
 
             String buf = new String();
@@ -71,7 +67,7 @@ public class App
         }
     }
 
-    public static void doCommand (Schedule schedule, BookingList bookingList){
+    private static void doCommand (Schedule schedule, BookingList bookingList){
         Scanner in = new Scanner(System.in);
         System.out.print("Enter the command: ");
         String command = in.nextLine();
@@ -110,7 +106,7 @@ public class App
 
     }
 
-    public static void reservePlaces(Schedule schedule, BookingList bookingList) {
+    private static void reservePlaces(Schedule schedule, BookingList bookingList) {
         Scanner in = new Scanner(System.in);
         System.out.println("Enter the date, you wish to do to session(dd-mm-yyyy):");
         StringBuilder date =new StringBuilder();
@@ -156,7 +152,7 @@ public class App
         }
 
     }
-    public static void removeReservation(Schedule schedule, BookingList bookingList){
+    private static void removeReservation(Schedule schedule, BookingList bookingList){
         Scanner in = new Scanner(System.in);
         System.out.println("Enter the id of reservation, you wish to remove:");
         if(in.hasNextInt()){
@@ -176,7 +172,7 @@ public class App
             System.out.println("Incorrect id. Try this command again.");
         }
     }
-    public static void infoByReservation(Schedule schedule, BookingList bookingList){
+    private static void infoByReservation(Schedule schedule, BookingList bookingList){
         Scanner in = new Scanner(System.in);
         System.out.println("Enter the id of reservation, you wish to see information:");
         if(in.hasNextInt()){

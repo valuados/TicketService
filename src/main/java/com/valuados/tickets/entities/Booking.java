@@ -3,9 +3,6 @@ package com.valuados.tickets.entities;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by valua on 4/5/2017.
- */
 public class Booking {
     private int id;
     private int sessionId;
