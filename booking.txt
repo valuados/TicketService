@@ -1,0 +1,21 @@
+id
+1
+session
+1
+places
+1 11
+1 12
+1 13
+id
+2
+session
+1
+places
+2 11
+2 12
+id
+3
+session
+2
+places
+9 9

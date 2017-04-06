@@ -19,7 +19,7 @@ public class Session {
         this.time = time;
         this.name = name;
         place = new int[15][15];
-        Arrays.fill(place, 0);
+       // Arrays.fill(place, 0);
     }
 
     public int getId() {
@@ -78,7 +78,7 @@ public class Session {
     @Override
     public String toString(){
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("------------------------------------------------------------------");
+        stringBuilder.append("------------------------------------------------------------------\n");
         stringBuilder.append("The movie: \""+this.name+"\"\n");
         stringBuilder.append("Session time: "+ this.time+".\n\n");
         stringBuilder.append("   ");

@@ -9,59 +9,68 @@ import java.util.Scanner;
 
 public class App 
 {
-    private static final String INPUTFILENAME = "input.txt";
+    private static final String INPUTSESSION = "session.txt";
+    private static final String INPUTBOOKING = "booking.txt";
+
 
     public static void main( String[] args )
 
     {
         Schedule schedule = new Schedule();
         BookingList bookingList= new BookingList();
-        readFile(INPUTFILENAME, schedule, bookingList);
+        readFile(schedule, bookingList);
         System.out.println("Welcome to Ticket Booking System");
         System.out.println("To see all commands type help");
         while(true){
             doCommand(schedule, bookingList);
         }
     }
-    private static void readFile(String filename, Schedule schedule, BookingList bookingList){
-        try (Scanner sc = new Scanner(new File(INPUTFILENAME))) {
+    private static void readFile(Schedule schedule, BookingList bookingList){
+        try (Scanner sc = new Scanner(new File(INPUTSESSION))) {
 
             String buf = new String();
-            if(sc.hasNextLine()){
-                if(sc.nextLine().equals("Sessions")){
-                    schedule = new Schedule();
-                    ArrayList<Session> sessionList = new ArrayList<>();
-                    while (!sc.nextLine().equals("Booking")){
-                        int id = sc.nextInt();
-                        String time = sc.nextLine();
-                        String name = sc.nextLine();
-                        sessionList.add(new Session(id,time,name));
-                    }
-                    schedule.setShedule(sessionList);
-                }
-                ArrayList<Booking> bookings= new ArrayList<>();
-                while(sc.hasNext()){
-                    sc.nextLine();
-                    int id=sc.nextInt();
-                    sc.nextLine();
-                    int sessionId = sc.nextInt();
-                    ArrayList<Place> places = new ArrayList<>();
-                    while(!sc.nextLine().equals("id") || sc.hasNext()){
-                        Place place = new Place(sc.nextInt(),sc.nextInt());
-                        places.add(place);
-                    }
-                    Booking booking = new Booking(id,sessionId,places);
-                    bookings.add(booking);
-
-                    schedule.setStatusBusy(booking);
-
-                }
-                bookingList.setBookings(bookings);
+            ArrayList<Session> sessionList = new ArrayList<>();
+            while(sc.hasNext()) {
+                int id = sc.nextInt();
+                sc.nextLine();
+                String time = sc.nextLine();
+                String name = sc.nextLine();
+                sessionList.add(new Session(id, time, name));
             }
+            schedule.setShedule(sessionList);
 
             sc.close();
         } catch (IOException e) {
-            System.out.println("Error while reading file.");
+            System.out.println("Error while reading file "+ INPUTSESSION);
+            e.printStackTrace();
+
+        }
+
+        try (Scanner sc = new Scanner(new File(INPUTBOOKING))) {
+
+            ArrayList<Booking> bookings= new ArrayList<>();
+            while(sc.hasNext()){
+                sc.next();
+                int id=sc.nextInt();
+                sc.next();
+                int sessionId = sc.nextInt();
+                sc.next();
+                ArrayList<Place> places = new ArrayList<>();
+                while(sc.hasNextInt()){
+                    Place place = new Place(sc.nextInt()-1,sc.nextInt()-1);
+                    places.add(place);
+                }
+                Booking booking = new Booking(id,sessionId,places);
+                bookings.add(booking);
+
+                schedule.setStatusBusy(booking);
+
+            }
+            bookingList.setBookings(bookings);
+
+            sc.close();
+        } catch (IOException e) {
+            System.out.println("Error while reading file "+ INPUTSESSION);
             e.printStackTrace();
 
         }

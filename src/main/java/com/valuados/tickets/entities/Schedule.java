@@ -29,13 +29,14 @@ public class Schedule {
     public void seeTimetable(){
 
         StringBuilder sentence= new StringBuilder();
-        sentence.append("------------------------------------------------------------------");
+        sentence.append("------------------------------------------------------------------\n");
         for(int i =0; i< schedule.size();i++){
             Session session= schedule.get(i);
             sentence.append("The movie: \""+session.getName()+"\"\n");
             sentence.append("Session time: "+ session.getTime()+".\n\n\n");
 
         }
+        System.out.println(sentence);
     }
 
     public Session getSessionByDate(String date){
