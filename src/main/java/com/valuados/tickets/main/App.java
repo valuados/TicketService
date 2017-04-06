@@ -117,6 +117,7 @@ public class App
 
     private static void reservePlaces(Schedule schedule, BookingList bookingList) {
         Scanner in = new Scanner(System.in);
+        //System.out.println("To cancel operation on any stage type: cancel");
         System.out.println("Enter the date, you wish to do to session(dd-mm-yyyy):");
         StringBuilder date =new StringBuilder();
         date.append(in.nextLine()+" ");
@@ -134,24 +135,29 @@ public class App
             ArrayList<Place> placesToReserve= new ArrayList<>();
             if(in.hasNextInt()){
                 int n= in.nextInt();
-                for (int i=0; i<n;i++){
-                    System.out.println("Enter row:");
-                    int row= in.nextInt();
-                    System.out.println("Enter seat:");
-                    int seat= in.nextInt();
-                    if(session.getPlace(row, seat)==0){
-                        placesToReserve.add(new Place(row,seat));
+                if(n>=0){
+                    for (int i=0; i<n;i++){
+                        System.out.println("Enter row:");
+                        int row= in.nextInt()-1;
+                        System.out.println("Enter seat:");
+                        int seat= in.nextInt()-1;
+                        if(session.getPlace(row, seat)==0){
+                            placesToReserve.add(new Place(row,seat));
+                        }
+                        else{
+                            System.out.println("This seat is busy, choose another seat");
+                            i--;
+                        }
                     }
-                    else{
-                        System.out.println("This seat is busy, choose another seat");
-                        i--;
-                    }
+                    int id = bookingList.getBooking(bookingList.getBookingListSize()-1).getId();
+                    Booking currentBooking= new Booking(id+1,session.getId(),placesToReserve);
+                    bookingList.addBooking(currentBooking);
+                    schedule.setStatusBusy(currentBooking);
+                    System.out.println(currentBooking.toString(session.getName(),session.getTime()));
                 }
-                int id = bookingList.getBooking(bookingList.getBookingListSize()-1).getId();
-                Booking currentBooking= new Booking(id,session.getId(),placesToReserve);
-                bookingList.addBooking(currentBooking);
-                schedule.setStatusBusy(currentBooking);
-                System.out.println(currentBooking.toString(session.getName(),session.getTime()));
+                else{
+                    System.out.println("Incorrect number of seats, type res again to reserve seats.");
+                }
 
             }
 

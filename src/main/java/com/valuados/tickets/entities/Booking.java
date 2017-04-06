@@ -44,13 +44,13 @@ public class Booking {
     }
     public String toString(String name, String date){
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("------------------------------------------------------------------");
+        stringBuilder.append("------------------------------------------------------------------\n");
         stringBuilder.append("Booking id: \""+this.id+"\"\n");
         stringBuilder.append("Movie name: \""+name+"\"\n");
         stringBuilder.append("Session date: "+ date+".\n");
         stringBuilder.append("Bought seats([№row, №seat]):\n");
         for (int i=0; i<places.size();i++){
-            stringBuilder.append("["+places.get(i).getRow()+", "+places.get(i).getSeat()+"] ");
+            stringBuilder.append("["+(places.get(i).getRow()+1)+", "+(places.get(i).getSeat()+1)+"] ");
         }
         stringBuilder.append("\n");
         return stringBuilder.toString();
