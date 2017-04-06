@@ -141,11 +141,17 @@ public class App
                         int row= in.nextInt()-1;
                         System.out.println("Enter seat:");
                         int seat= in.nextInt()-1;
-                        if(session.getPlace(row, seat)==0){
-                            placesToReserve.add(new Place(row,seat));
+                        if(row>0 && row<16 && seat>0 && seat<15){
+                            if(session.getPlace(row, seat)==0){
+                                placesToReserve.add(new Place(row,seat));
+                            }
+                            else{
+                                System.out.println("This seat is busy, choose another seat");
+                                i--;
+                            }
                         }
                         else{
-                            System.out.println("This seat is busy, choose another seat");
+                            System.out.println("This seat does not exist.");
                             i--;
                         }
                     }
